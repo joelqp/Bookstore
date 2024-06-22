@@ -136,5 +136,6 @@
                 </div>
             </div>
         </div>
+        <p>{{$user->name}}</p>
     </body>
 </html>

@@ -14,7 +14,28 @@
 
 ### Problemas encontrados:
 
-- ...
+-   Al crear la migracion de Books, `$table->foreignId('author_id')->constrained()->nullOnDelete();` me produjo un error de NOT NULLABLE, mire la documentacion y `constrained` deberia estar al final.
+
+    Pero una vez cambiado, tambien me salia un error. Esto se debia a que la tabla, a pesar del error, ya estaba creada en la BD pero no estaba registrada en la tabla migrations.
+    Mi solucion fue hacer un rollback pero no era suficiente ya que eliminó todas las tablas menos la que dio problemas, "books".
+
+    Finalmente tuve que eliminarlo manualmente, y hacer otra vez migrate y salio todo correcto.
+
+- Al crear las factories, he tenido un poco de dificultad para entender las diferentes maneras de crearlas. 
+Podria hacerlo de 2 maneras
+    
+    - a) todos los autores y libros estan vinculados entre si.
+
+		- Podria llamar a factory()->create de book dentro del seeder de autors para que por cada autor creado, se vayan a crear libros vinculados a él
+		- tambien podria tener el mismo resultado si llamo a factory()->create de autor dentro de la factory de books.
+    - b) otro enfoque seria crear autores independientemente, y luego crear books y vicularlos a los autores existentes.
+
+elegi la segunda porque asi habria mas independencia entre autores y libros y puedo tener mas control sobre el codigo, ademas de que pueden existir autores sin libros o libros sin autor (en el caso que se elimine el autor).
+
+
+Creo que tengo una comprension general buena, pero si en futuros proyectos me encuentro con esta situacion con mas complejidad, puedo revisar a mas profundidad la documentacion y ponerlo
+en pratica.
+
 ---
 ## Resultados
 
@@ -57,7 +78,11 @@ Para ejecutar las migraciones.
 ```sh
 php artisan migrate
 ```
-
+Para ejecutar los seeders (en ese orden).
+```sh
+php artisan db:seed --class=AuthorsTableSeeder
+php artisan db:seed --class=BooksTableSeeder
+```
 
 Para acceder a la web de desarrollo a traves de la URL .`localhost:800`
 ```sh
