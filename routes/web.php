@@ -3,6 +3,9 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/users/{user_id}', [UserController::class, 'index']);
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::resource('authors', AuthorController::class);
+Route::resource('books', BookController::class);

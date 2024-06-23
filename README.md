@@ -30,7 +30,7 @@ Podria hacerlo de 2 maneras
 		- tambien podria tener el mismo resultado si llamo a factory()->create de autor dentro de la factory de books.
     - b) otro enfoque seria crear autores independientemente, y luego crear books y vicularlos a los autores existentes.
 
-elegi la segunda porque asi habria mas independencia entre autores y libros y puedo tener mas control sobre el codigo, ademas de que pueden existir autores sin libros o libros sin autor (en el caso que se elimine el autor).
+elegi la segunda porque asi habria mas independencia entre autores y libros y puedo tener mas control sobre el codigo.
 
 
 Creo que tengo una comprension general buena, pero si en futuros proyectos me encuentro con esta situacion con mas complejidad, puedo revisar a mas profundidad la documentacion y ponerlo
@@ -56,7 +56,7 @@ en pratica.
 
 ### Configuración
 
-Asegurate de tener un archivo *.env* que sea una copia de *.env.example* donde solo cambies la configures la conexión a tu base de datos:
+Asegurate de tener el archivo *.env* igual que *.env.example* donde solo configures la conexión a tu base de datos:
 
 ```sh
 DB_CONNECTION=mysql
