@@ -17,10 +17,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item {{ Request::is('authors*') ? 'active' : '' }}">
                     <a class="nav-link" href="/authors">Authors</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('books*') ? 'active' : '' }}">
                     <a class="nav-link" href="/books">Books</a>
                 </li>
             </ul>
@@ -35,7 +35,7 @@
             @yield('content')
         </main>
         <footer class="my-4">
-            <p>&copy; 2024 Mi Proyecto</p>
+            <p>&copy; 2024 Bookstore</p>
         </footer>
     </div>
     <!-- bootstrap orientado a jquery -->

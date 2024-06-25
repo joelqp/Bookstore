@@ -2,30 +2,35 @@
 
 @section('title', 'Books')
 @section('header')
-ENCABEZAO
 @endsection
 @section('content')
-    <h1>Autores</h1>
-    <a href="{{ route('books.create') }}" class="btn btn-primary">Añadir Autor</a>
+<!-- esta alerta esta vinculada al libro -->
+@if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+@endif
+    <h1>Books</h1>
+    <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
     <table class="table mt-4">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Acciones</th>
+                <th>Title</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($authors as $author)
+            @foreach ($books as $book)
                 <tr>
-                    <td>{{ $author->id }}</td>
-                    <td>{{ $author->name }}</td>
+                    <td>{{ $book->id }}</td>
+                    <td>{{ $book->title }}</td>
                     <td>
-                        <a href="{{ route('books.edit', $author->id) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('books.destroy', $author->id) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
                 </tr>
