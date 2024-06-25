@@ -14,13 +14,6 @@
 
 ### Problemas encontrados:
 
--   Al crear la migracion de Books, `$table->foreignId('author_id')->constrained()->nullOnDelete();` me produjo un error de NOT NULLABLE, mire la documentacion y `constrained` deberia estar al final.
-
-    Pero una vez cambiado, tambien me salia un error. Esto se debia a que la tabla, a pesar del error, ya estaba creada en la BD pero no estaba registrada en la tabla migrations.
-    Mi solucion fue hacer un rollback pero no era suficiente ya que eliminó todas las tablas menos la que dio problemas, "books".
-
-    Finalmente tuve que eliminarlo manualmente, y hacer otra vez migrate y salio todo correcto.
-
 - Al crear las factories, he tenido un poco de dificultad para entender las diferentes maneras de crearlas. 
 Podria hacerlo de 2 maneras
     
@@ -30,18 +23,44 @@ Podria hacerlo de 2 maneras
 		- tambien podria tener el mismo resultado si llamo a factory()->create de autor dentro de la factory de books.
     - b) otro enfoque seria crear autores independientemente, y luego crear books y vicularlos a los autores existentes.
 
-elegi la segunda porque asi habria mas independencia entre autores y libros y puedo tener mas control sobre el codigo.
+    Elegi la segunda porque asi habria mas independencia entre autores y libros y puedo tener mas control sobre el codigo.
+
+- Al momento de crear la funcionalidad *Delete author* me surgió un error: 
+```sql
+SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails
+(`bookstore`.`books`, CONSTRAINT `books_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`))
+```
+
+Inicialmente defini la clave foránea asi en la migracion de los libros:
+`$table->foreignId('author_id')->nullOnDelete()->constrained();`
+entendi que `constrained()` deberia ir siempre al final y nada más, pero el error estaba aqui.
+
+Releyendo a profundidad la documentacion y mirando algun ejemplo en foros, entendi mas a profundidad como funcionan los metodos
+y la importancia de su orden.
+
+Entendi que `nullable()` o `constrained()` son *modificadores* y que indican propiedades de la columna, y hacer `nullondelete()` o `ondelete()` son acciones asociadas y no propiedades de la columna, por lo que deben llamarse despues de los metodos que indican propiedades.
+
+por lo que la definicion correcta era:  `$table->foreignId('author_id')->nullable()->constrained()->nullOnDelete();`
 
 
-Creo que tengo una comprension general buena, pero si en futuros proyectos me encuentro con esta situacion con mas complejidad, puedo revisar a mas profundidad la documentacion y ponerlo
-en pratica.
+
+
+
+
+Creo que tengo una comprension general buena, pero si en futuros proyectos me encuentro con situaciones con mas complejidad, puedo revisar a mas profundidad la documentacion y ponerlo en pratica.
 
 ---
 ## Resultados
 
-#link video
+#link al video
+//arreglar editar libro
 
-#imagenes
+![Video](ruta/al/video/demo.mp4)
+
+### Imagenes
+
+![Primera version](public/bookstore_v1.JPG)
+![Version con un estilo oscuro](public/bookstore_v2.JPG)
 
 
 ---
