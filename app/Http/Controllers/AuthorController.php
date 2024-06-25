@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Spatie\LaravelIgnition\Http\Requests\UpdateConfigRequest;
 
 class AuthorController extends Controller
 {
     public function index()
     {
         $authors = Author::all();
-        return view('authors.index', compact('authors'));
+        return view('authors.index', ['authors' => $authors]);
     }
 
     public function create()
     {
-        //return view('authors.create');
+        return view('authors.create');
     }
 
     public function store(Request $request)
@@ -24,10 +25,10 @@ class AuthorController extends Controller
             'name' => 'required',
         ]);
 
+        // no hace falta crear una condicion para comprobar si hay fallo a menos que quiera manejar excepciones de manera mas robusta
         Author::create($request->all());
-
-        return redirect()->route('authors.index')
-                         ->with('success', 'Autor creado correctamente.');
+         return redirect()->route('authors.index')
+                          ->with('success', 'Author created!');
     }
 
     public function show(Author $author)
@@ -49,14 +50,15 @@ class AuthorController extends Controller
         $author->update($request->all());
 
         return redirect()->route('authors.index')
-                         ->with('success', 'Autor actualizado correctamente.');
+                         ->with('success', 'Author edited!');
     }
 
     public function destroy(Author $author)
     {
+        //prinero asignar null a los libros de este author
         $author->delete();
 
         return redirect()->route('authors.index')
-                         ->with('success', 'Autor eliminado correctamente.');
+                         ->with('success', 'Author deleted!');
     }
 }

@@ -3,6 +3,9 @@
 @section('title', 'Inicio')
 
 @section('content')
-    <h1>Bienvenido a la Tienda</h1>
-    <p>Esta es la página principal.</p>
+    <h1> Home </h1>
+    @foreach ( $description as $paragraph )
+    <p>{{ $paragraph }}</p>
+    @endforeach
+
 @endsection
