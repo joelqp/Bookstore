@@ -2,8 +2,11 @@
 
 @section('title', 'Editar Autor')
 
+@section('header')
+<h1>Edit Author</h1>
+@endsection
+
 @section('content')
-    <h1>Edit Author</h1>
     <form action="{{ route('authors.update', $author->id) }}" method="POST">
         @csrf
         @method('PUT')

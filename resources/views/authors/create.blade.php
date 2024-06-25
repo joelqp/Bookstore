@@ -1,9 +1,11 @@
 @extends('layout')
 
 @section('title', 'Añadir Autor')
+@section('header')
+<h1>Add Author</h1>
+@endsection
 
 @section('content')
-    <h1>Add Author</h1>
     <form action="{{ route('authors.store') }}" method="POST">
         @csrf
         <div class="mb-3">

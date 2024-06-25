@@ -2,6 +2,7 @@
 
 @section('title', 'Books')
 @section('header')
+<h1>Books</h1>
 @endsection
 @section('content')
 <!-- esta alerta esta vinculada al libro -->
@@ -10,9 +11,8 @@
                 {{ session('success') }}
             </div>
 @endif
-    <h1>Books</h1>
     <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
-    <table class="table mt-4">
+    <table class="table mt-4 table-dark table-striped table-hover">
         <thead>
             <tr>
                 <th>ID</th>

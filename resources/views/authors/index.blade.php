@@ -3,6 +3,7 @@
 @section('title', 'Authors')
 
 @section('header')
+<h1>Authors</h1>
 @endsection
 
 
@@ -13,9 +14,8 @@
                 {{ session('success') }}
             </div>
 @endif
-    <h1>Authors</h1>
     <a href="{{ route('authors.create') }}" class="btn btn-primary">Add Author</a>
-    <table class="table mt-4">
+    <table class="table mt-4 table-dark table-striped table-hover">
         <thead>
             <tr>
                 <th>ID</th>
