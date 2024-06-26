@@ -73,14 +73,18 @@ class BookController extends Controller
     {
 
         $request->validate([
-            'name' => 'required',
+            'title' => 'required',
+            'author_id'=> 'required|exists:authors,id',
         ]);
 
         // no hace falta crear una condicion para comprobar si hay fallo a menos que quiera manejar excepciones de manera mas robusta
-        $book->update($request->all());
-         return redirect()->route('books.index')
-                          ->with('success', 'Book updated!');
+        $book->update([
+            'title'=> $request->input('title'),
+            'author_id'=> $request->input('author_id'),
+                ]);
 
+        return redirect()->route('books.index')
+        ->with('success', 'Book updated!');
     }
 
     /**

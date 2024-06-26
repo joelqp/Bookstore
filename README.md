@@ -52,14 +52,21 @@ Creo que tengo una comprension general buena, pero si en futuros proyectos me en
 ---
 ## Resultados
 
-#link al video
-//arreglar editar libro
-
-![Video](ruta/al/video/demo.mp4)
+### Video
+https://youtu.be/r1KeJRFrBxo
 
 ### Imagenes
 
+<center>
+primera version
+</center>
+
 ![Primera version](public/bookstore_v1.JPG)
+
+<center>
+Version con un estilo oscuro
+</center>
+
 ![Version con un estilo oscuro](public/bookstore_v2.JPG)
 
 
