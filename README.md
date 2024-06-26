@@ -9,7 +9,13 @@
 
 - He decidido no hacer en cascada la relacion autores-libros para que, en el caso de eliminar un autor, los libros pertenecientes a él puedan cambiar a otro autor al seleccionar el boton de editar el libro.
 
-- El proyecto, ademas de lo que se pide, incluye algunas implementaciones mas como ...
+- El mensaje de la accion realizada se muestra en el index de libros o autores y no en la misma pagina de la accion.
+
+- La pestaña está *active* de acuerdo a la pagina actual.
+
+- En el desplegable de la accion de editar libro, se hace *selected* al cargar la pagina por primera vez a la opcion del autor original.
+
+- El proyecto, lo hice con un estilo dark.
 
 
 ### Problemas encontrados:
